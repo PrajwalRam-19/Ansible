@@ -1,0 +1,16 @@
+---
+- name: installing openjdk on ubuntu
+  hosts: all
+  become: yes
+  vars:
+    java_version: "openjdk-{{ version }}-jdk"
+  tasks:
+    - name: install openjdk
+      ansible.builtin.apt:
+       name: "{{ java_version }}"
+       update_cache: yes
+       state: present
+
+  ansible -i hosts  jdk.yml -e version =
+  
+  ansible-playbook -i hosts --syntax-check jdk.yml
